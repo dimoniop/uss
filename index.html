@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Мы вдвоём</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbf1f0;--surface:#fff9f8;--ink:#4a2230;--muted:#86626c;--rose:#b8445f;--blush:#f4d6d9;--gold:#9a6f38;--line:#ecd3d4;--on-rose:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1620;--surface:#37202b;--ink:#f6e4e6;--muted:#c9a5af;--rose:#e58aa0;--blush:#4a2a37;--gold:#d9b27a;--line:#553341;--on-rose:#2a1620}}
+:root[data-theme="dark"]{--bg:#2a1620;--surface:#37202b;--ink:#f6e4e6;--muted:#c9a5af;--rose:#e58aa0;--blush:#4a2a37;--gold:#d9b27a;--line:#553341;--on-rose:#2a1620}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Russo One",system-ui,sans-serif;font-synthesis:none;-webkit-font-smoothing:antialiased}
+.serif,h1,h2,h3{font-weight:400;margin:0}
+main{max-width:520px;margin:0 auto;padding:20px 18px 110px}
+h2{font-size:28px;margin-bottom:4px}
+.sub{color:var(--muted);margin:0 0 18px}
+.arch{background:var(--blush);border-radius:999px 999px 24px 24px;padding:44px 20px 26px;text-align:center;margin-bottom:18px}
+.big{font-size:88px;line-height:1;color:var(--rose)}
+.names{font-size:24px;margin-top:6px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:10px}
+.row{display:flex;align-items:center;gap:10px}
+.grow{flex:1;min-width:0}
+.t{font-weight:600}
+.m{color:var(--muted);font-size:14px}
+.num{font-size:26px;color:var(--rose);line-height:1;text-align:right}
+input,textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:8px}
+textarea{min-height:96px;resize:vertical}
+:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--rose);color:var(--on-rose);border:0;border-radius:999px;padding:12px 22px;font-weight:600}
+.btn.full{width:100%}
+.ghost{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:9px 16px}
+.x{background:none;border:0;color:var(--muted);font-size:20px;padding:4px 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chip{background:var(--surface);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 14px}
+.chip.on{background:var(--rose);border-color:var(--rose);color:var(--on-rose)}
+.idea{font-size:24px;line-height:1.3;text-align:center;padding:26px 14px}
+.q{font-size:24px;line-height:1.3;padding:8px 0 16px}
+.done .t{text-decoration:line-through;color:var(--muted)}
+.check{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--rose);background:none;color:var(--on-rose);padding:0;flex:none}
+.done .check{background:var(--rose)}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;max-width:86px;background:none;border:0;color:var(--muted);padding:4px 0;font-size:11.5px;display:flex;flex-direction:column;align-items:center;gap:1px}
+nav button span{font-size:20px;line-height:1.2}
+nav button.on{color:var(--rose);font-weight:600}
+.toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;max-width:90%;text-align:center}
+.fly{position:fixed;font-size:28px;pointer-events:none;animation:fly 1.5s ease-out both}
+@keyframes fly{0%{opacity:0;transform:translateY(0)}15%{opacity:1}100%{transform:translateY(-240px) scale(1.5) rotate(12deg);opacity:0}}
+.enter{animation:enter .35s ease-out}
+@keyframes enter{from{opacity:0;transform:translateY(8px)}}
+.btn,.chip,.ghost,.check{transition:transform .15s,background-color .2s,color .2s,border-color .2s}
+.btn:active,.chip:active,.ghost:active{transform:scale(.96)}
+.check.pop{animation:pop .35s}
+@keyframes pop{50%{transform:scale(1.35)}}
+.idea.new{animation:ideain .5s ease-out}
+@keyframes ideain{from{opacity:0;transform:scale(.95) rotate(-1.5deg)}}
+.beat{animation:beat .5s}
+@keyframes beat{30%{transform:scale(1.1)}60%{transform:scale(.97)}}
+nav button span{transition:transform .2s}
+nav button.on span{transform:translateY(-3px) scale(1.15)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-delay:0s!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<nav id="nav"></nav>
+<script>
+const TABS=[["home","♡","Главная"],["dates","✦","Даты"],["wish","❀","Желания"],["ask","?","Вопросы"],["date","☾","Свидания"],["diary","✎","Дневник"]];
+const QS=["Какой момент из нашей истории ты вспоминаешь чаще всего?","Что я делаю такого, от чего тебе становится спокойно?","Куда бы ты поехал(а) со мной, если бы завтра был выходной на неделю?","Какая моя привычка тебя умиляет?","Что бы ты хотел(а) попробовать вместе в этом году?","Какой наш обычный вечер тебе дороже всего?","Чему ты научился(лась) благодаря мне?","Какая песня напоминает тебе о нас?","О чём ты мечтаешь, но редко говоришь вслух?","Что я могу сделать на этой неделе, чтобы тебе стало легче?","Какое наше фото нравится тебе больше всего и почему?","Каким ты представляешь наш идеальный воскресный день?","За что ты благодарен(на) мне сегодня?","Что в первый день знакомства тебя удивило во мне?","Какое место в городе для тебя «наше»?"];
+const IDEAS=[
+["Прогулка до заката с термосом чая","calm","free"],["Домашний киновечер с пледом и попкорном","calm","free"],["Письма друг другу «на потом»","romantic","free"],["Ужин при свечах, приготовленный вместе","romantic","low"],["Пикник в парке","calm","low"],["Танцы на кухне под любимые песни","romantic","free"],["Поход в музей или на выставку","calm","low"],["Велопрогулка с остановкой на кофе","active","low"],["Катание на коньках или роликах","active","low"],["Мастер-класс по керамике или готовке","active","high"],["Ужин в ресторане, где вы ещё не были","romantic","high"],["Поездка на выходные в другой город","active","high"],["Спа-вечер дома: маски, музыка, массаж","calm","low"],["Рассвет на крыше или холме","romantic","free"],["Настольные игры и бутылка вина","calm","low"],["Фотосессия друг у друга в городе","active","free"],["Билеты на концерт или спектакль","romantic","high"],["Готовим блюдо из страны мечты","active","low"]];
+const MOODS={calm:"Спокойно",active:"Активно",romantic:"Романтично"},BUDG={free:"Бесплатно",low:"Недорого",high:"Щедро"};
+const def=()=>({a:"",b:"",start:"",hearts:0,ev:[],wish:[],ans:{},diary:[],qo:0,mood:"calm",bud:"free",idea:null});
+let S=load(),tab="home";
+function load(){try{const r=localStorage.getItem("pair-app");if(r)return Object.assign(def(),JSON.parse(r))}catch(e){}return def()}
+function save(){try{localStorage.setItem("pair-app",JSON.stringify(S))}catch(e){}}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const v=id=>(document.getElementById(id)||{}).value||"";
+const pl=(n,f)=>{n=Math.abs(n);const m=n%100,k=n%10;return f[m>10&&m<20?2:k===1?0:k>1&&k<5?1:2]};
+const pd=s=>{const[y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)};
+const today=()=>{const n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate())};
+const days=(a,b)=>Math.round((b-a)/864e5);
+const fmt=d=>d.toLocaleDateString("ru-RU",{day:"numeric",month:"long",year:"numeric"});
+function nextOcc(d){const t=today();let n=new Date(t.getFullYear(),d.getMonth(),d.getDate());if(n<t)n=new Date(t.getFullYear()+1,d.getMonth(),d.getDate());return n}
+function left(n){return n===0?`<div class="num">Сегодня</div>`:`<div class="num">${n}<div class="m">${pl(n,["день","дня","дней"])}</div></div>`}
+
+function home(){
+ if(!S.start)return `<h2>Мы вдвоём</h2><p class="sub">Расскажите о себе, чтобы начать отсчёт.</p>
+ <input id="na" placeholder="Твоё имя"><input id="nb" placeholder="Имя партнёра">
+ <label class="m" for="sd">Дата начала отношений</label><input id="sd" type="date">
+ <button class="btn full" data-a="setup">Начать</button>`;
+ const t=today(),n=days(pd(S.start),t),ann=nextOcc(pd(S.start)),yrs=ann.getFullYear()-pd(S.start).getFullYear();
+ return `<div class="arch"><div class="big">${n}</div><div class="m">${pl(n,["день","дня","дней"])} вместе</div><div class="names">${esc(S.a)} &amp; ${esc(S.b)}</div></div>
+ <div class="card row"><div class="grow"><div class="t">${yrs} ${pl(yrs,["год","года","лет"])} вместе</div><div class="m">${fmt(ann)}</div></div>${left(days(t,ann))}</div>
+ <button class="btn full" data-a="think">♡ Думаю о тебе</button>
+ <p class="m" style="text-align:center">Сердечек: ${S.hearts}. Пока они остаются на этом телефоне, до партнёра их донесёт синхронизация.</p>
+ <button class="ghost" data-a="reset" style="margin-top:12px">Изменить имена и дату</button>`}
+
+function dates(){
+ const t=today(),L=S.ev.map(e=>({e,n:days(t,e.y?nextOcc(pd(e.d)):pd(e.d))})).sort((a,b)=>a.n-b.n);
+ return `<h2>Важные даты</h2><p class="sub">Годовщины, дни рождения, поездки.</p>
+ <input id="et" placeholder="Название события"><input id="ed" type="date">
+ <label class="row m" style="margin-bottom:10px"><input id="ey" type="checkbox" style="width:auto;margin:0" checked> Повторять каждый год</label>
+ <button class="btn full" data-a="addEv" style="margin-bottom:16px">Добавить дату</button>
+ ${L.length?L.map(({e,n})=>`<div class="card row"><div class="grow"><div class="t">${esc(e.t)}</div><div class="m">${fmt(pd(e.d))}</div></div>${n<0?`<div class="m">прошло</div>`:left(n)}<button class="x" data-a="delEv" data-i="${e.id}" aria-label="Удалить">×</button></div>`).join(""):`<p class="m">Пока пусто. Добавьте первую дату выше.</p>`}`}
+
+function wish(){
+ return `<h2>Наши желания</h2><p class="sub">Места, фильмы и рестораны на двоих.</p>
+ <input id="wt" placeholder="Что хотим попробовать?"><select id="wc"><option>Место</option><option>Фильм</option><option>Ресторан</option><option>Другое</option></select>
+ <button class="btn full" data-a="addWish" style="margin-bottom:16px">Добавить</button>
+ ${S.wish.length?S.wish.map(w=>`<div class="card row ${w.done?"done":""}"><button class="check ${w.id==popId?"pop":""}" data-a="togWish" data-i="${w.id}" aria-label="Отметить">${w.done?"✓":""}</button><div class="grow"><div class="t">${esc(w.t)}</div><div class="m">${esc(w.c)}</div></div><button class="x" data-a="delWish" data-i="${w.id}" aria-label="Удалить">×</button></div>`).join(""):`<p class="m">Список пуст. Запишите первое желание.</p>`}`}
+
+function ask(){
+ const k=days(new Date(2024,0,1),today())+S.qo,q=QS[((k%QS.length)+QS.length)%QS.length],key=today().toISOString().slice(0,10)+"|"+q;
+ return `<h2>Вопрос дня</h2><p class="sub">Ответьте каждый для себя, потом сравните вслух.</p>
+ <div class="q">${q}</div><textarea id="ans" data-key="${esc(key)}" placeholder="Ваш ответ">${esc(S.ans[key]||"")}</textarea>
+ <button class="ghost" data-a="nextQ">Другой вопрос</button>`}
+
+function date(){
+ const ch=(o,cur,a)=>Object.entries(o).map(([k,l])=>`<button class="chip ${cur===k?"on":""}" data-a="${a}" data-k="${k}">${l}</button>`).join("");
+ return `<h2>Идея для свидания</h2><p class="sub">Выберите настроение и бюджет.</p>
+ <div class="chips">${ch(MOODS,S.mood,"mood")}</div><div class="chips">${ch(BUDG,S.bud,"bud")}</div>
+ <div class="card idea ${newIdea?"new":""}">${S.idea?esc(S.idea):"Нажмите на кнопку, и мы что-нибудь придумаем"}</div>
+ <button class="btn full" data-a="idea">Подобрать идею</button>
+ ${S.idea?`<button class="ghost full" data-a="ideaWish" style="width:100%;margin-top:10px">Добавить в желания</button>`:""}`}
+
+function diary(){
+ return `<h2>Наш дневник</h2><p class="sub">Заметки о том, что хочется сохранить.</p>
+ <textarea id="dt" placeholder="Что случилось сегодня?"></textarea>
+ <button class="btn full" data-a="addDiary" style="margin-bottom:16px">Сохранить запись</button>
+ ${S.diary.length?S.diary.map(d=>`<div class="card"><div class="row"><div class="m grow">${fmt(new Date(d.ts))}</div><button class="x" data-a="delDiary" data-i="${d.id}" aria-label="Удалить">×</button></div><div style="white-space:pre-wrap">${esc(d.t)}</div></div>`).join(""):`<p class="m">Записей пока нет.</p>`}`}
+
+const VIEWS={home,dates,wish,ask,date,diary};
+let popId=null,newIdea=false,enterNext=false,counted=false;
+function countUp(){if(counted||!S.start)return;counted=true;if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;const el=document.querySelector(".big");if(!el)return;const n=+el.textContent,t0=performance.now();(function f(t){const p=Math.min((t-t0)/1100,1);el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}
+function render(){
+ const app=document.getElementById("app");
+ app.className="";if(enterNext){void app.offsetWidth;app.className="enter"}
+ app.innerHTML=VIEWS[tab]();popId=null;newIdea=false;enterNext=false;if(tab==="home")countUp();
+ document.getElementById("nav").innerHTML=TABS.map(([k,i,l])=>`<button class="${k===tab?"on":""}" data-a="tab" data-k="${k}"><span>${i}</span>${l}</button>`).join("");
+}
+function toast(m){const e=document.createElement("div");e.className="toast";e.textContent=m;document.body.appendChild(e);setTimeout(()=>e.remove(),2200)}
+const uid=()=>Date.now()+Math.random();
+const A={
+ tab(b){tab=b.dataset.k;enterNext=true;scrollTo(0,0)},
+ setup(){const a=v("na").trim(),b=v("nb").trim(),d=v("sd");if(!a||!b||!d)return toast("Заполните имена и дату");S.a=a;S.b=b;S.start=d},
+ reset(){S.start=""},
+ think(b){S.hearts++;const r=b.getBoundingClientRect();b.classList.remove("beat");void b.offsetWidth;b.classList.add("beat");for(let i=0;i<3;i++){const f=document.createElement("div");f.className="fly";f.textContent=i===1?"♥":"♡";f.style.left=(r.left+r.width/2-14+(Math.random()*120-60))+"px";f.style.top=r.top+"px";f.style.color="var(--rose)";f.style.animationDelay=(i*0.15)+"s";f.style.fontSize=(22+Math.random()*16)+"px";document.body.appendChild(f);setTimeout(()=>f.remove(),1900)}},
+ addEv(){const t=v("et").trim(),d=v("ed");if(!t||!d)return toast("Укажите название и дату");S.ev.push({id:uid(),t,d,y:document.getElementById("ey").checked})},
+ delEv(b){S.ev=S.ev.filter(e=>e.id!=b.dataset.i)},
+ addWish(){const t=v("wt").trim();if(!t)return toast("Напишите, что хотите");S.wish.unshift({id:uid(),t,c:v("wc"),done:false})},
+ togWish(b){const w=S.wish.find(x=>x.id==b.dataset.i);if(w){w.done=!w.done;popId=w.done?w.id:null}},
+ delWish(b){S.wish=S.wish.filter(x=>x.id!=b.dataset.i)},
+ nextQ(){S.qo++},
+ mood(b){S.mood=b.dataset.k},bud(b){S.bud=b.dataset.k},
+ idea(){let p=IDEAS.filter(i=>i[1]===S.mood&&i[2]===S.bud);if(!p.length)p=IDEAS.filter(i=>i[1]===S.mood||i[2]===S.bud);S.idea=p[Math.floor(Math.random()*p.length)][0];newIdea=true},
+ ideaWish(){S.wish.unshift({id:uid(),t:S.idea,c:"Свидание",done:false});toast("Добавлено в желания")},
+ addDiary(){const t=v("dt").trim();if(!t)return toast("Напишите хотя бы пару слов");S.diary.unshift({id:uid(),t,ts:Date.now()})},
+ delDiary(b){S.diary=S.diary.filter(x=>x.id!=b.dataset.i)}
+};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(!b||!A[b.dataset.a])return;A[b.dataset.a](b);save();if(b.dataset.a==="think"){const o=document.querySelector(".m[style]");if(o)o.textContent="Сердечек: "+S.hearts+". Пока они остаются на этом телефоне, до партнёра их донесёт синхронизация.";return}render()});
+document.addEventListener("input",e=>{if(e.target.id==="ans"){S.ans[e.target.dataset.key]=e.target.value;save()}});
+render();
+</script>
+</body>
+</html>
